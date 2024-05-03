@@ -23,7 +23,7 @@ struct SetCornersView: View {
     
     @State private var mapImage: Image = Image(systemName: "map")
     
-    @State private var isPinLocked:         [CornerType: Bool]?    = [.NW: false, .NE: false, .SW: false, .SE: false]
+    @State private var isPinLocked: [CornerType: Bool]? = [.NW: false, .NE: false, .SW: false, .SE: false]
     @State private var cornerPointsOnImage: [CornerType: CGPoint]? = [.NW: .zero, .NE: .zero, .SW: .zero, .SE: .zero] // Координаты углов изображения карты в системе XY
     
     @State private var centerPoint: CGPoint = .zero

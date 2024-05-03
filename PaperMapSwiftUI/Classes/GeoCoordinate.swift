@@ -499,15 +499,6 @@ struct GeoCoordinates: Equatable {
     static func == (lhs: GeoCoordinates, rhs: GeoCoordinates) -> Bool {
         lhs.lat == rhs.lat && lhs.long == rhs.long
     }
-    
-    // https://stackoverflow.com/questions/1560492/how-to-tell-whether-a-point-is-to-the-right-or-left-side-of-a-line
-    // Определение положения нашей точки относительно линии по двум введенным точкам с координатами
-    public func getPointSideFromToTheLine(startOfLine: GeoCoordinates, endOfLine: GeoCoordinates) -> PointSideFromLine {
-        let startOfLineP = CGPoint(x: startOfLine.long.coordInDeg, y: startOfLine.lat.coordInDeg)
-        let endOfLineP = CGPoint(x: endOfLine.long.coordInDeg, y: endOfLine.lat.coordInDeg)
-        let point = CGPoint(x: self.long.coordInDeg, y: self.lat.coordInDeg)
-        return point.getPointSideToTheLineHorisintaly(startOfLine: startOfLineP, endOfLine: endOfLineP)
-    }
 }
 
 // Расширение для вычисления внутренних координат

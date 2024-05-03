@@ -8,8 +8,10 @@ import UIKit
 
 //https://betterprogramming.pub/how-to-pick-an-image-from-camera-or-photo-library-in-swiftui-a596a0a2ece
 
+
 // Использование встроенного UIKit элемента "UIViewControllerRepresentable" в SwiftUI
 struct LoadImageView: UIViewControllerRepresentable {
+    
     var sourceType: UIImagePickerController.SourceType = .photoLibrary // Выбор загрузки изображения
     @Binding var image: Image? // Изображение карты
     @Binding var isPresented: Bool // Контроль открытия окна
@@ -26,7 +28,7 @@ struct LoadImageView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        // Ничего не обновляет
+        // Обновления не требуются
     }
 }
 
@@ -51,5 +53,4 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.isPresented = false
     }
-    
 }

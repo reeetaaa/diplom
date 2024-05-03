@@ -13,36 +13,33 @@ import CoreLocationUI
 struct ScrollableMap: View {
     
     // MARK: - Bindings
-    @Binding var mapImage: Image
-    @Binding var coord: CLLocationCoordinate2D?  // <<< in
-    @Binding var centerPoint: CGPoint            // >>> out
-    @Binding var followLocation: Bool
-    @Binding var scrollHelper: ScrollHelper // >>> out
-    
-//    @Binding var frameOfScrollableMap: CGRect
+    @Binding var mapImage: Image                 // Изображение карты
+    @Binding var coord: CLLocationCoordinate2D?  // Координата <<< in
+    @Binding var centerPoint: CGPoint            // Центральная точка >>> out
+    @Binding var followLocation: Bool            // Флаг следования за местоположением
+    @Binding var scrollHelper: ScrollHelper      // Помощник прокрутки >>> out
     
     // MARK: - States
-    @GestureState private var zoom = 1.0
+    @GestureState private var zoom = 1.0         // Состояние жеста масштабирования
     
-//    @State private var scrollHelper = ScrollHelper.zero
-    @State private var scrollOffset: CGPoint = .zero
+    @State private var scrollOffset: CGPoint = .zero // Смещение прокрутки
     
-    @State private var userPointOnMap: CGPoint = .zero
+    @State private var userPointOnMap: CGPoint = .zero // Точка пользователя на карте
     
-    @StateObject var locationManager = LocationManager()
+    @StateObject var locationManager = LocationManager() // Менеджер местоположения
     
-    @State var correction = GeoCoordinates()
-    
-    
-    private let scrollerId = 22222
-    
-    private let pointOnMap = PointOnMapCalculator(corners: MyAppViewModel.instance.getCorners())
-    
-    private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2)
-    
-    private let userImage = "location.circle.fill" // "circle.fill" // smallcircle.filled.circle  location.circle.fill
+    @State var correction = GeoCoordinates() // Коррекция географических координат
     
     
+    private let scrollerId = 22222 // Идентификатор прокрутки
+    
+    private let pointOnMap = PointOnMapCalculator(corners: MyAppViewModel.instance.getCorners()) // Точка на карте
+    
+    private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2) // Отступы
+    
+    private let userImage = "location.circle.fill" // Изображение пользователя
+    
+    // Отображение
     var body: some View {
         ScrollViewReader { reader in
             ZStack {
@@ -143,12 +140,14 @@ struct ScrollableMap: View {
         }
     }
     
+    // Прокрутка до указанной точки на карте
     private func scrollToPoint(_ pointOnMap: CGPoint, reader: ScrollViewProxy) {
         withAnimation {
             reader.scrollTo(scrollerId, anchor: scrollHelper.getUnitPoint(from: userPointOnMap))
         }
     }
     
+    // Коррекция и поиск точки на карте и, при необходимости, прокрутка
     private func correctAndFindPointOnMapAndScrollIfNeeded(from coord: CLLocationCoordinate2D, reader: ScrollViewProxy) {
         let correctedCoord = GeoCoordinates(from: coord, coordType: DataSource.instance.coordinateType) 
                                 - correction
@@ -162,6 +161,7 @@ struct ScrollableMap: View {
     }
 }
 
+// Класс для управления местоположением
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
 
@@ -172,42 +172,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.delegate = self
     }
 
+    // Запрос местоположения
     func requestLocation() {
         manager.requestLocation()
     }
 
+    // Обработчик обновления местоположения
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.first?.coordinate
     }
     
+    // Обработчик ошибки местоположения
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("ERROR OF LOCATION: ", error)
     }
 }
 
-
-final class ScrollDelegate: NSObject, UITableViewDelegate, UIScrollViewDelegate {
-    var isScrolling: Binding<Bool>?
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let isScrolling = isScrolling?.wrappedValue,!isScrolling {
-            self.isScrolling?.wrappedValue = true
-        }
-    }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if let isScrolling = isScrolling?.wrappedValue, isScrolling {
-            self.isScrolling?.wrappedValue = false
-        }
-    }
-    // When the user slowly drags the scrollable control, decelerate is false after the user releases their finger, so the scrollViewDidEndDecelerating method is not called.
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            if let isScrolling = isScrolling?.wrappedValue, isScrolling {
-                self.isScrolling?.wrappedValue = false
-            }
-        }
-    }
-}
 
 
 

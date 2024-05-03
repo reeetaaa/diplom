@@ -140,7 +140,6 @@ struct MainPageView: View {
                     MyAppViewModel.instance.lastSavedCoord = locationDataManager.coord
                 }
                 
-                
             default:
                 ProgressView()
             }

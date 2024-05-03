@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-// Класс для хранения данных
+// Класс для хранения данных (Singleton)
 class DataSource {
     
     private(set) static var instance = DataSource()
