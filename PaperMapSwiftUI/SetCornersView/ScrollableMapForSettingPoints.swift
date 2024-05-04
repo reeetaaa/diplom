@@ -7,34 +7,37 @@
 
 import SwiftUI
 
+// Прокрутка карты для установки точек
 struct ScrollableMapForSettingPoints: View {
     
-    @Binding var mapImage: Image
-    @Binding var mode: SettingPointMode
+    @Binding var mapImage: Image // Изображение карты
+    @Binding var mode: SettingPointMode // Режим работы установки углов изображения карты
     
-    @Binding var isPinLocked: [CornerType: Bool]?
-    @Binding var cornerPointsOnImage: [CornerType: CGPoint]?
+    @Binding var isPinLocked: [CornerType: Bool]? // Заблокированы ли точки
+    @Binding var cornerPointsOnImage: [CornerType: CGPoint]? // Координаты углов карты на изображении
     
-    @Binding var centerPoint: CGPoint
+    @Binding var centerPoint: CGPoint // Центр изображения карты
     
-    @Binding var explicitlyScrollToThisPoint: CGPoint
+    @Binding var explicitlyScrollToThisPoint: CGPoint // Прокрутка к определенной точке
     
-    @GestureState private var zoom = 1.0
+    @GestureState private var zoom = 1.0 // Масштаб карты
     
-    @State private var scrollHelper = ScrollHelper.zero
+    @State private var scrollHelper = ScrollHelper.zero // Помощник прокрутки
     
-    private let scrollerId = 22222
-    private let unlockedImageName = "smallcircle.filled.circle" // "record.circle"
-    private let lockedImageName = "link.circle.fill" // "circle.hexagongrid.circle" // "command", "circle.hexagongrid.fill"
+    private let scrollerId = 22222 // Уникальный идентификатор для прокрутки
+    private let unlockedImageName = "smallcircle.filled.circle"
+    private let lockedImageName = "link.circle.fill"
     
-    
+    // Внутренние отступы для карты
     private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2)
-    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners) // Переменная для расчета координат на карте
 
     
     var body: some View {
+        // Позволяет получать доступ к информации о прокрутке ScrollView и взаимодействовать с ней
         ScrollViewReader { reader in
             ZStack {
+                // Позволяет получать информацию о геометрии и размерах представления, в котором он находится
                 GeometryReader { scrollGeoProxy in
                     ScrollView ([.horizontal, .vertical]) {
                         ZStack {
@@ -91,7 +94,6 @@ struct ScrollableMapForSettingPoints: View {
                                         
                                         
                                         withAnimation {
-                                            //let defaultPosToScroll = scrollHelper.contentSize.middlePoint(relatedTo: padding)
                                             if let cornerType = mode.getCornerType(), let corner = cornerPointsOnImage?[cornerType] {
                                                 reader.scrollTo(scrollerId, anchor: scrollHelper.getUnitPoint(from: corner))
                                             }
@@ -107,8 +109,7 @@ struct ScrollableMapForSettingPoints: View {
                             
                             centerPoint = scrollHelper.getCenterPointOfVisibleArea()
                             
-                            // MARK: - Calculate deltas of Lat and Long
-                            
+                            // Вычислить дельты широты и долготы
                             let coordOfTopLeading = pointOnMap.getCoordinatesFrom(point: scrollHelper.getCornerPointOfVisibleArea(corner: .topLeading))
                             let coordOfBottomTrailing = pointOnMap.getCoordinatesFrom(point: scrollHelper.getCornerPointOfVisibleArea(corner: .bottomTrailing))
                         }
@@ -149,7 +150,7 @@ struct ScrollableMapForSettingPoints: View {
     }
 }
 
-
+// Определяет ключ предпочтений для отслеживания смещения прокрутки
 struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGPoint = .zero
 
@@ -157,6 +158,7 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+// Передача размера встроенного содержимого представления
 struct IntrinsicContentSizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
 
@@ -165,6 +167,7 @@ struct IntrinsicContentSizePreferenceKey: PreferenceKey {
     }
 }
 
+// Передача размера представления
 struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
 

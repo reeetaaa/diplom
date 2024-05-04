@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct ScrollHelper: CustomStringConvertible {
-    private(set) var contentSize: CGSize
-    private(set) var scrollSize: CGSize
+// Помощник перемещения по изображению карты
+struct ScrollHelper {
+    private(set) var contentSize: CGSize // Полный размер содержимого области прокрутки
+    private(set) var scrollSize: CGSize // Размер видимой части области прокрутки
     
-    private var scrollViewLeadinsTopPoint: CGPoint
-    private var scrollViewTrailingBottomPoint: CGPoint
+    private var scrollViewLeadinsTopPoint: CGPoint // Левая верхняя точка полной части области прокрутки
+    private var scrollViewTrailingBottomPoint: CGPoint // Правая нижняя точка
     
     init() {
         contentSize = .zero
@@ -22,6 +23,7 @@ struct ScrollHelper: CustomStringConvertible {
         scrollViewTrailingBottomPoint = .zero
     }
     
+    // Нулевая позиция ScrollHelper
     public static var zero: ScrollHelper {
         var sZero = ScrollHelper()
         sZero.contentSize = .zero
@@ -29,40 +31,35 @@ struct ScrollHelper: CustomStringConvertible {
         return sZero
     }
     
-    
+    // Сдвиг центра области прокрутки относительно переданной позиции
     func getUnitPoint(from pos: CGPoint) -> UnitPoint {
         let testX = (contentSize.width / 2  - pos.x + 0) / scrollSize.width + 0.5
         let testY = (contentSize.height / 2  - pos.y + 0) / scrollSize.height + 0.5
         return UnitPoint(x: testX, y: testY)
     }
     
-    var description: String {
-        "contentSize: \(contentSize); scrollSize: \(scrollSize)"
-    }
-    
-    /**
-     This function sets `scrollSize` and corners to get then Visible Area's coordinates corners
-     */
+    // Устанавливает scrollSize и углы, чтобы получить координаты углов видимой области
     mutating func setScrollSizeFromIncludedInsetValue(value: CGPoint, inFrmae frame: CGRect, withInsets safeAreaInsets: EdgeInsets) {
-        let scroolViewSize = frame.size - CGSize(safeAreaInsets, 
-                                                 corner: .bottomTrailing)
+        let scroolViewSize = frame.size - CGSize(safeAreaInsets, corner: .bottomTrailing)
         self.scrollSize = scroolViewSize
         
-        let scrollOffset = value - CGSize(safeAreaInsets, 
-                                          corner: .topTrailing)
+        let scrollOffset = value - CGSize(safeAreaInsets, corner: .topTrailing)
         
         scrollViewLeadinsTopPoint = -scrollOffset
         scrollViewTrailingBottomPoint = -scrollOffset + self.scrollSize
     }
     
+    // Установка размера области прокрутки
     mutating func setScrollSize(_ size: CGSize) {
         scrollSize = size
     }
     
+    // Установка размера содержимого
     mutating func setContentSize(_ size: CGSize) {
         contentSize = size
     }
     
+    // Получить конкретную координату угла видимой области прокрутки
     func getCornerPointOfVisibleArea(corner: RectCorner) -> CGPoint {
         switch corner {
         case .topLeading:
@@ -76,8 +73,9 @@ struct ScrollHelper: CustomStringConvertible {
         }
     }
     
+    // Получить координату центра видимой области прокрутки
     func getCenterPointOfVisibleArea() -> CGPoint {
-        // the next operation is getting a mean value
+        // Получение среднего значения
         scrollViewLeadinsTopPoint ~~ scrollViewTrailingBottomPoint
     }
 }

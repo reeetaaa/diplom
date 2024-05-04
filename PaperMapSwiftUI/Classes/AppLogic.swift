@@ -1,5 +1,5 @@
 //
-//  MainPageModel.swift
+//  AppLogic.swift
 //  PaperMapSwiftUI
 //
 //  Created by Margarita Babukhadia on 16/10/23.
@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
+// Логика приложения
 class AppLogic {
     
     static public var instance = AppLogic()

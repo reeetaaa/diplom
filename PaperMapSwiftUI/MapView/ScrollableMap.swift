@@ -12,14 +12,12 @@ import CoreLocationUI
 
 struct ScrollableMap: View {
     
-    // MARK: - Bindings
     @Binding var mapImage: Image                 // Изображение карты
     @Binding var coord: CLLocationCoordinate2D?  // Координата <<< in
     @Binding var centerPoint: CGPoint            // Центральная точка >>> out
     @Binding var followLocation: Bool            // Флаг следования за местоположением
     @Binding var scrollHelper: ScrollHelper      // Помощник прокрутки >>> out
     
-    // MARK: - States
     @GestureState private var zoom = 1.0         // Состояние жеста масштабирования
     
     @State private var scrollOffset: CGPoint = .zero // Смещение прокрутки
@@ -29,7 +27,6 @@ struct ScrollableMap: View {
     @StateObject var locationManager = LocationManager() // Менеджер местоположения
     
     @State var correction = GeoCoordinates() // Коррекция географических координат
-    
     
     private let scrollerId = 22222 // Идентификатор прокрутки
     
@@ -95,10 +92,10 @@ struct ScrollableMap: View {
                         }
                         
                     }
-                    .simultaneousGesture( // normal .gesture will not work here because there is .gesture on mapImage above
+                    .simultaneousGesture(
                         DragGesture(coordinateSpace: .global)
                             .onChanged { value in
-                                followLocation = false // if user starts scrolling, don't follow location
+                                followLocation = false 
                             }
                     )
                     .onAppear {
