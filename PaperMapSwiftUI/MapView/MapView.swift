@@ -12,7 +12,7 @@ import MapKit // Для использоватения встроенной ка
 struct MapView: View {
     @State private var mapImage: Image = Image(systemName: "pencil")
     
-    @StateObject var locationDataManager = MyAppLogic.instance.locationDataManager
+    @StateObject var locationDataManager = AppLogic.instance.locationDataManager
     
     @State var coord: CLLocationCoordinate2D?
     
@@ -33,9 +33,9 @@ struct MapView: View {
     @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D?
     
     
-    private let pointOnMap = PointOnMapCalculator(corners: MyAppLogic.instance.corners)
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
     
-    private let mapSpanCalculator = MapSpanCalculator(corners: MyAppLogic.instance.corners)
+    private let mapSpanCalculator = MapSpanCalculator(corners: DataSource.instance.corners)
     
     var body: some View {
         VStack {
@@ -95,7 +95,7 @@ struct MapView: View {
     private func repaintRealMapAccordingMyMap() {
         if let location = geoCoordinatesOnMyMap {
             
-            let correction = MyAppLogic.instance.mapCorrection
+            let correction = DataSource.instance.mapCorrection
             
             positionOfCameraOnRealMap = MapCameraPosition.region(
                 MKCoordinateRegion(center: .init(latitude: (location.lat + correction.lat).coordInDeg,

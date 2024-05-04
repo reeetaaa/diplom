@@ -41,7 +41,7 @@ struct SetCorrectionView: View {
     @State private var iDidScroll = false
     
     
-    private let pointOnMap = PointOnMapCalculator(corners: MyAppLogic.instance.corners)
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
     
     private let unlockedImageName = "smallcircle.filled.circle"
     
@@ -113,7 +113,7 @@ struct SetCorrectionView: View {
         }
         .toolbar {
             Button("Save") {
-                MyAppLogic.instance.mapCorrection = correction
+                DataSource.instance.mapCorrection = correction
                 showCorrectionPage = false // This will close the window
             }
         }

@@ -27,10 +27,12 @@
 		0A878F402B04DEBC00DB02D7 /* ScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A878F3F2B04DEBC00DB02D7 /* ScrollHelper.swift */; };
 		0A878F422B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A878F412B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift */; };
 		0A87E9EB2ADD831E006482C3 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EA2ADD831E006482C3 /* MainPageView.swift */; };
-		0A87E9EF2ADD834C006482C3 /* MyAppLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */; };
+		0A87E9EF2ADD834C006482C3 /* AppLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EE2ADD834C006482C3 /* AppLogic.swift */; };
 		0A87E9F12ADD88EF006482C3 /* LoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9F02ADD88EF006482C3 /* LoadImageView.swift */; };
 		0ADDB81A2B07B1C500A3F074 /* PointOnMapCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */; };
 		5CB51D2D2BD17662004A2E95 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB51D2C2BD17662004A2E95 /* SettingsView.swift */; };
+		5CEDFED02BE6555800098474 /* CornerOnMapValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDFECF2BE6555800098474 /* CornerOnMapValues.swift */; };
+		5CEDFED22BE6559C00098474 /* PointOnMapValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDFED12BE6559C00098474 /* PointOnMapValues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +69,12 @@
 		0A878F3F2B04DEBC00DB02D7 /* ScrollHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollHelper.swift; sourceTree = "<group>"; };
 		0A878F412B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableMapForSettingPoints.swift; sourceTree = "<group>"; };
 		0A87E9EA2ADD831E006482C3 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
-		0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppLogic.swift; sourceTree = "<group>"; };
+		0A87E9EE2ADD834C006482C3 /* AppLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogic.swift; sourceTree = "<group>"; };
 		0A87E9F02ADD88EF006482C3 /* LoadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageView.swift; sourceTree = "<group>"; };
 		0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOnMapCalculator.swift; sourceTree = "<group>"; };
 		5CB51D2C2BD17662004A2E95 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5CEDFECF2BE6555800098474 /* CornerOnMapValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerOnMapValues.swift; sourceTree = "<group>"; };
+		5CEDFED12BE6559C00098474 /* PointOnMapValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOnMapValues.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +130,6 @@
 				0A2088172AD095960083F240 /* Preview Content */,
 				0A2088252AD453B80083F240 /* Consts.swift */,
 				0A20882A2AD46A280083F240 /* Classes */,
-				0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */,
 				0A2F4D9C2AE2D87A00EFE51E /* TestPage.swift */,
 			);
 			path = PaperMapSwiftUI;
@@ -152,11 +155,14 @@
 		0A20882A2AD46A280083F240 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0A2088302AD46A280083F240 /* DataSource.swift */,
+				0A87E9EE2ADD834C006482C3 /* AppLogic.swift */,
 				0A20882B2AD46A280083F240 /* GeoCoordinate.swift */,
+				0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */,
+				5CEDFECF2BE6555800098474 /* CornerOnMapValues.swift */,
+				5CEDFED12BE6559C00098474 /* PointOnMapValues.swift */,
 				0A20882C2AD46A280083F240 /* Enums.swift */,
 				0A20882D2AD46A280083F240 /* Extensions.swift */,
-				0A2088302AD46A280083F240 /* DataSource.swift */,
-				0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -302,13 +308,15 @@
 				0A2088352AD46A280083F240 /* Extensions.swift in Sources */,
 				0A87E9F12ADD88EF006482C3 /* LoadImageView.swift in Sources */,
 				0A6AADEC2B07F8610084D215 /* MapView.swift in Sources */,
+				5CEDFED02BE6555800098474 /* CornerOnMapValues.swift in Sources */,
 				0A2088262AD453B80083F240 /* Consts.swift in Sources */,
 				0A2088332AD46A280083F240 /* GeoCoordinate.swift in Sources */,
 				0A6AADEF2B07FAB70084D215 /* ScrollableMap.swift in Sources */,
+				5CEDFED22BE6559C00098474 /* PointOnMapValues.swift in Sources */,
 				0ADDB81A2B07B1C500A3F074 /* PointOnMapCalculator.swift in Sources */,
 				0A40A4662B0D2038005178AC /* SetCorrectionView.swift in Sources */,
 				0A2088382AD46A280083F240 /* DataSource.swift in Sources */,
-				0A87E9EF2ADD834C006482C3 /* MyAppLogic.swift in Sources */,
+				0A87E9EF2ADD834C006482C3 /* AppLogic.swift in Sources */,
 				0A878F402B04DEBC00DB02D7 /* ScrollHelper.swift in Sources */,
 				5CB51D2D2BD17662004A2E95 /* SettingsView.swift in Sources */,
 				0A20883E2AD5215E0083F240 /* GeoPickerControl.swift in Sources */,

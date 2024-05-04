@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 // Класс для хранения данных (Singleton)
 class DataSource {
@@ -20,4 +21,14 @@ class DataSource {
     
     var coordinateType = GeoCoordinate.GeoCoordinateType.minDecimals(1) // Тип координат
     
+    private(set) var corners: [CornerType: CornerOnMapValues] =  // Координаты углов изображения карты
+        [.NW: CornerOnMapValues(cornerType: .NW),
+         .NE: CornerOnMapValues(cornerType: .NE),
+         .SW: CornerOnMapValues(cornerType: .SW),
+         .SE: CornerOnMapValues(cornerType: .SE)
+        ]
+    
+    var mapCorrection = GeoCoordinates() // Коррекция карты по широте и долготе
+    
+    var lastSavedCoord: CLLocationCoordinate2D?  // Координаты местоположения пользователя
 }

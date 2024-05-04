@@ -29,7 +29,7 @@ struct ScrollableMapForSettingPoints: View {
     
     
     private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2)
-    private let pointOnMap = PointOnMapCalculator(corners: MyAppLogic.instance.corners)
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
 
     
     var body: some View {

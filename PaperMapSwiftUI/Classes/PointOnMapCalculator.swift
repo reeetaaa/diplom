@@ -8,8 +8,6 @@
 import Foundation
 import MapKit
 
-
-
 // Калькулятор расчетов на линии
 struct PointOnTheLineCalculator {
     

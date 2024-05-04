@@ -42,7 +42,7 @@ struct SetCornersView: View {
                 // Кнопки для выбора угла
                 Text("Нажмите на кнопку, чтобы установить угол")
                 LazyVGrid(columns: [GridItem(), GridItem()]) {
-                    ForEach(MyAppLogic.instance.getCornersArr(), id: \.id) { cs in
+                    ForEach(AppLogic.instance.getCornersArr(), id: \.id) { cs in
                         PushButton(title: getTitle(of: cs), isLocked: cs.isSet)
                         .onTapGesture { d in
                             if cs.isSet {
@@ -80,19 +80,19 @@ struct SetCornersView: View {
                                 var coordinates = GeoCoordinates(coordType: DataSource.instance.coordinateType)
                                 coordinates.lat = $latitude.wrappedValue
                                 coordinates.long = $longitude.wrappedValue
-                                MyAppLogic.instance.setCoordinates(to: cornerType, coordinates: coordinates)
-                                MyAppLogic.instance.setPointOnMap(to: cornerType, point: cornerPointsOnImage?[cornerType] ?? CGPoint.zero)
+                                AppLogic.instance.setCoordinates(to: cornerType, coordinates: coordinates)
+                                AppLogic.instance.setPointOnMap(to: cornerType, point: cornerPointsOnImage?[cornerType] ?? CGPoint.zero)
                                 
-                                isPinLocked?[cornerType] = MyAppLogic.instance.isLocked(of: cornerType)
+                                isPinLocked?[cornerType] = AppLogic.instance.isLocked(of: cornerType)
                             }
                             .buttonStyle(.bordered)
                             Button("Отменить") {
                                 mode = .showingButtons(cornerType)
-                                isPinLocked?[cornerType] = MyAppLogic.instance.isLocked(of: cornerType)
+                                isPinLocked?[cornerType] = AppLogic.instance.isLocked(of: cornerType)
                             }.buttonStyle(.bordered)
                         }
                         .onAppear() {
-                            if let coordinates = MyAppLogic.instance.getCoordinates(of: cornerType) {
+                            if let coordinates = AppLogic.instance.getCoordinates(of: cornerType) {
                                 latitude = coordinates.lat
                                 longitude = coordinates.long
                             }
@@ -102,7 +102,7 @@ struct SetCornersView: View {
                     GeoPickerControl(geoType: .latitude, coordinate: $latitude)
                         .padding(-10)
                         .onAppear {
-                            if let coordinates = MyAppLogic.instance.getCoordinates(of: cornerType) {
+                            if let coordinates = AppLogic.instance.getCoordinates(of: cornerType) {
                                 latitude = coordinates.lat
                             }
                         }
@@ -110,7 +110,7 @@ struct SetCornersView: View {
                     GeoPickerControl(geoType: .longitude, coordinate: $longitude)
                         .padding(-10)
                         .onAppear {
-                            if let coordinates = MyAppLogic.instance.getCoordinates(of: cornerType) {
+                            if let coordinates = AppLogic.instance.getCoordinates(of: cornerType) {
                                 longitude = coordinates.long
                             }
                         }
@@ -133,7 +133,7 @@ struct SetCornersView: View {
                     HStack {
                         Spacer()
                         VStack {
-                            let coordinates = MyAppLogic.instance.getCoordinates(of: cornerType)
+                            let coordinates = AppLogic.instance.getCoordinates(of: cornerType)
                             
                             if let coordinates = coordinates {
                                 Text(coordinates.lat.getString(isLatitude: true))
@@ -142,7 +142,7 @@ struct SetCornersView: View {
                         }
                         Spacer()
                         Button("Удалить точку") {
-                            MyAppLogic.instance.deleteCoordinatesAndPointOnMap(at: cornerType)
+                            AppLogic.instance.deleteCoordinatesAndPointOnMap(at: cornerType)
                             mode = .showingButtons(cornerType)
                             isPinLocked?[cornerType] = false
                         }.buttonStyle(.bordered)
@@ -162,8 +162,8 @@ struct SetCornersView: View {
             latitude = GeoCoordinate(coordType: DataSource.instance.coordinateType)
             longitude = GeoCoordinate(coordType: DataSource.instance.coordinateType)
             for cT in [CornerType.NW, .NE, .SE, .SW] {
-                isPinLocked?[cT] = MyAppLogic.instance.isLocked(of: cT)
-                if let pointOnMap = MyAppLogic.instance.getPointOnMap(of: cT) {
+                isPinLocked?[cT] = AppLogic.instance.isLocked(of: cT)
+                if let pointOnMap = AppLogic.instance.getPointOnMap(of: cT) {
                     cornerPointsOnImage?[cT] = pointOnMap
                 }
             }
@@ -171,7 +171,7 @@ struct SetCornersView: View {
     }
     
     private func getTitle(of cornerSetting: CornerOnMapValues) -> String {
-        if let coordStr = MyAppLogic.instance.getCoordinates(of: cornerSetting.cornerType)?.getCoordinatesString() {
+        if let coordStr = AppLogic.instance.getCoordinates(of: cornerSetting.cornerType)?.getCoordinatesString() {
             return coordStr
         }
         return cornerSetting.cornerType.rawValue + "\n" + "угол"
@@ -181,8 +181,8 @@ struct SetCornersView: View {
         var result: PointOnMapValues? = nil
         let latFrom = cornerType.anotherCornerWIthSameLatName
         let longFrom = cornerType.anotherCornerWithSameLongName
-        if let valuesToGetLat = MyAppLogic.instance.getCornerOnMapValues(of: latFrom),
-           let valuesToGetLong = MyAppLogic.instance.getCornerOnMapValues(of: longFrom) {
+        if let valuesToGetLat = AppLogic.instance.getCornerOnMapValues(of: latFrom),
+           let valuesToGetLong = AppLogic.instance.getCornerOnMapValues(of: longFrom) {
             if let coordForLat = valuesToGetLat.coordinates, let coordForLong = valuesToGetLong.coordinates {
                 var suggestedCoord = GeoCoordinates(lat: coordForLat.lat, long: coordForLong.long)
                 if let posXFrom = valuesToGetLong.pointOnMap?.x,

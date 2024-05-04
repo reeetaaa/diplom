@@ -33,7 +33,7 @@ struct ScrollableMap: View {
     
     private let scrollerId = 22222 // Идентификатор прокрутки
     
-    private let pointOnMap = PointOnMapCalculator(corners: MyAppLogic.instance.corners) // Точка на карте
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners) // Точка на карте
     
     private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2) // Отступы
     
@@ -122,10 +122,10 @@ struct ScrollableMap: View {
                 }
             }
             .onAppear() {
-                correction = MyAppLogic.instance.mapCorrection
+                correction = DataSource.instance.mapCorrection
                 if let coord = coord {
                     correctAndFindPointOnMapAndScrollIfNeeded(from: coord, reader: reader)
-                } else if let coord = MyAppLogic.instance.lastSavedCoord {
+                } else if let coord = DataSource.instance.lastSavedCoord {
                     correctAndFindPointOnMapAndScrollIfNeeded(from: coord, reader: reader)
                 }
             }
