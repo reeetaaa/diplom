@@ -14,7 +14,7 @@ struct MainPageView: View {
     @State private var image: Image? = DataSource.instance.mapImage
     
     // Менеджер для определения координат пользователя
-    @StateObject var locationDataManager = MyAppViewModel.instance.getLocationDataManager()
+    @StateObject var locationDataManager = MyAppLogic.instance.locationDataManager
     
     // Окна, которые должны быть открыты на этой странице
     @State private var showImagePicker = false // Страница выбора изображения
@@ -87,7 +87,7 @@ struct MainPageView: View {
                     }
                     // При изменении картинки сохранить ее в памяти
                     .onChange(of: image) {
-                        MyAppViewModel.instance.selectMapImage(image: image)
+                        MyAppLogic.instance.selectMapImage(image: image)
                     }
                     
                     Spacer() // ------------------------------------
@@ -127,7 +127,7 @@ struct MainPageView: View {
                     }
                     .disabled(!cornersAreSet)
                     .onAppear() {
-                        cornersAreSet = MyAppViewModel.instance.areCornersSet()
+                        cornersAreSet = MyAppLogic.instance.areCornersSet()
                     }
                     .navigationDestination(isPresented: $showMap) {
                         MapView()
@@ -137,7 +137,7 @@ struct MainPageView: View {
                 }
                 // Если координаты пользователя изменились, обновить переменную координат пользователя
                 .onChange(of: locationDataManager.coord) {
-                    MyAppViewModel.instance.lastSavedCoord = locationDataManager.coord
+                    MyAppLogic.instance.lastSavedCoord = locationDataManager.coord
                 }
                 
             default:

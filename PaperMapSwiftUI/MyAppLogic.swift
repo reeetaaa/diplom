@@ -57,7 +57,12 @@ class CornerOnMapValues: PointOnMapValues, Identifiable {
     }
 }
 
-struct MyAppLogic {
+class MyAppLogic {
+    
+    static public var instance = MyAppLogic()
+    
+    private init() {}
+    
     
     var locationDataManager = LocationDataManager()
     
@@ -75,12 +80,33 @@ struct MyAppLogic {
      .SE: CornerOnMapValues(cornerType: .SE)
     ]
     
-    mutating func deleteCoordinatesAndPointOnMap(at cornerType: CornerType) {
+    func getCornersArr() -> [CornerOnMapValues] {
+        [corners[.NW]!, corners[.NE]!, corners[.SW]!, corners[.SE]!]
+    }
+    
+    func areCornersSet() -> Bool {
+        for corner in getCornersArr() {
+            if !corner.isSet {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func selectMapImage(image: Image?) {
+        DataSource.instance.mapImage = image
+    }
+    
+    func isLocked(of cornerType: CornerType) -> Bool {
+        getCoordinates(of: cornerType) != nil
+    }
+    
+    func deleteCoordinatesAndPointOnMap(at cornerType: CornerType) {
         corners[cornerType]?.coordinates = nil
         corners[cornerType]?.pointOnMap = nil
     }
     
-    mutating func setCoordinates(to cornerType: CornerType, coordinates: GeoCoordinates) {
+    func setCoordinates(to cornerType: CornerType, coordinates: GeoCoordinates) {
         corners[cornerType]?.coordinates = coordinates
     }
     
@@ -97,19 +123,11 @@ struct MyAppLogic {
         corners[cornerType]?.pointOnMap
     }
     
-    mutating func setPointOnMap(to cornerType: CornerType, point: CGPoint) {
+    func setPointOnMap(to cornerType: CornerType, point: CGPoint) {
         corners[cornerType]?.pointOnMap = point
     }
     
     func getIsOn(of cornerType: CornerType) -> Bool {
         corners[cornerType]!.isSet
-    }
-    
-    func getCorrectionMyCoordinates() -> GeoCoordinates? {
-        correctionMyCoordinates
-    }
-    
-    func getCorrectionRealCoordinates() -> GeoCoordinates? {
-        correctionRealCoordinates
     }
 }

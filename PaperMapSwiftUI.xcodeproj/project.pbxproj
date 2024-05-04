@@ -27,7 +27,6 @@
 		0A878F402B04DEBC00DB02D7 /* ScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A878F3F2B04DEBC00DB02D7 /* ScrollHelper.swift */; };
 		0A878F422B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A878F412B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift */; };
 		0A87E9EB2ADD831E006482C3 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EA2ADD831E006482C3 /* MainPageView.swift */; };
-		0A87E9ED2ADD8336006482C3 /* MyAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EC2ADD8336006482C3 /* MyAppViewModel.swift */; };
 		0A87E9EF2ADD834C006482C3 /* MyAppLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */; };
 		0A87E9F12ADD88EF006482C3 /* LoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87E9F02ADD88EF006482C3 /* LoadImageView.swift */; };
 		0ADDB81A2B07B1C500A3F074 /* PointOnMapCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */; };
@@ -68,7 +67,6 @@
 		0A878F3F2B04DEBC00DB02D7 /* ScrollHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollHelper.swift; sourceTree = "<group>"; };
 		0A878F412B04DEF100DB02D7 /* ScrollableMapForSettingPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableMapForSettingPoints.swift; sourceTree = "<group>"; };
 		0A87E9EA2ADD831E006482C3 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
-		0A87E9EC2ADD8336006482C3 /* MyAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppViewModel.swift; sourceTree = "<group>"; };
 		0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppLogic.swift; sourceTree = "<group>"; };
 		0A87E9F02ADD88EF006482C3 /* LoadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageView.swift; sourceTree = "<group>"; };
 		0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOnMapCalculator.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				0A2088172AD095960083F240 /* Preview Content */,
 				0A2088252AD453B80083F240 /* Consts.swift */,
 				0A20882A2AD46A280083F240 /* Classes */,
-				0A87E9EC2ADD8336006482C3 /* MyAppViewModel.swift */,
 				0A87E9EE2ADD834C006482C3 /* MyAppLogic.swift */,
 				0A2F4D9C2AE2D87A00EFE51E /* TestPage.swift */,
 			);
@@ -312,7 +309,6 @@
 				0A40A4662B0D2038005178AC /* SetCorrectionView.swift in Sources */,
 				0A2088382AD46A280083F240 /* DataSource.swift in Sources */,
 				0A87E9EF2ADD834C006482C3 /* MyAppLogic.swift in Sources */,
-				0A87E9ED2ADD8336006482C3 /* MyAppViewModel.swift in Sources */,
 				0A878F402B04DEBC00DB02D7 /* ScrollHelper.swift in Sources */,
 				5CB51D2D2BD17662004A2E95 /* SettingsView.swift in Sources */,
 				0A20883E2AD5215E0083F240 /* GeoPickerControl.swift in Sources */,
