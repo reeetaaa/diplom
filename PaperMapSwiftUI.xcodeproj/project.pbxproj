@@ -159,8 +159,8 @@
 				0A87E9EE2ADD834C006482C3 /* AppLogic.swift */,
 				0A20882B2AD46A280083F240 /* GeoCoordinate.swift */,
 				0ADDB8192B07B1C500A3F074 /* PointOnMapCalculator.swift */,
-				5CEDFECF2BE6555800098474 /* CornerOnMapValues.swift */,
 				5CEDFED12BE6559C00098474 /* PointOnMapValues.swift */,
+				5CEDFECF2BE6555800098474 /* CornerOnMapValues.swift */,
 				0A20882C2AD46A280083F240 /* Enums.swift */,
 				0A20882D2AD46A280083F240 /* Extensions.swift */,
 			);
@@ -480,6 +480,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PaperMapSwiftUI/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Would like access your camera to capture and set your profile image";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to get your position to show on map";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would like access your photo libraray to choose and set your profile image";
@@ -514,6 +515,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PaperMapSwiftUI/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Would like access your camera to capture and set your profile image";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to get your position to show on map";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would like access your photo libraray to choose and set your profile image";

@@ -67,7 +67,7 @@ struct PointOnTheLineCalculator {
     }
 }
 
-// Калькулятор расчетов на карте
+// Калькулятор расчета точки на карте
 class PointOnMapCalculator {
     
     fileprivate var corners: [CornerType: CornerOnMapValues]

@@ -9,39 +9,41 @@ import SwiftUI
 import CoreLocation // Для определения пользовательских координат
 import MapKit // Для использоватения встроенной карты от Apple
 
+// Окно для навигации по готовому изображению карты
 struct MapView: View {
-    @State private var mapImage: Image = Image(systemName: "pencil")
+    @State private var mapImage: Image = Image(systemName: "pencil") // Изображение карты
     
+    // Экземпляр класса получения координат пользователя от системы
     @StateObject var locationDataManager = AppLogic.instance.locationDataManager
     
-    @State var coord: CLLocationCoordinate2D?
+    @State var coord: CLLocationCoordinate2D? // Координаты местоположения пользователя
     
-    @State var followLocation: Bool = true
-    @State var sliderValue: Double = 1
+    @State var followLocation: Bool = true // Следование за местоположением пользователя
+    @State var sliderValue: Double = 1 // Значение ползунка прозрачности слоя
     
+    // Положение реальной карты
     @State var positionOfCameraOnRealMap = MapCameraPosition.region(
         MKCoordinateRegion(center: .init(latitude: 60,longitude: 30),
                            span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01))
     )
     @State var scrollHelper = ScrollHelper.zero
     
-    @State private var lastSpanOfRealMap = MKCoordinateSpan(latitudeDelta: 0.01,                                                         longitudeDelta: 0.01)
+    // Переменная для соотношения масштаба реальной карты с изображением
+    @State private var lastSpanOfRealMap = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
+    @State private var centerPointOnMyMap: CGPoint = .zero // Центральная точка на изображении карты
+    @State var geoCoordinatesOnMyMap: GeoCoordinates? // Геокоординаты на изображении карты
+    @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D? // Геокоординаты на реальной карте
     
-    @State private var centerPointOnMyMap: CGPoint = .zero
-    @State var geoCoordinatesOnMyMap: GeoCoordinates?
-    @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D?
-    
-    
+    // Калькулятор расчета точки на карте
     private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
     
+    // Определение масштаба для встроенной карты
     private let mapSpanCalculator = MapSpanCalculator(corners: DataSource.instance.corners)
     
     var body: some View {
         VStack {
-            
             ZStack {
-            
                 Map(position: $positionOfCameraOnRealMap)
                     .mapStyle(.hybrid)
                     .scrollDisabled(true)
@@ -83,8 +85,6 @@ struct MapView: View {
         .onChange(of: locationDataManager.coord) {
             coord = locationDataManager.coord!
             
-            
-            
             positionOfCameraOnRealMap = MapCameraPosition.region(
                 MKCoordinateRegion(center: coord!,
                                    span: lastSpanOfRealMap)
@@ -92,6 +92,7 @@ struct MapView: View {
         }
     }
     
+    // Переопределить реальную карту в соответствии с изображением карты и ее коррекцией
     private func repaintRealMapAccordingMyMap() {
         if let location = geoCoordinatesOnMyMap {
             

@@ -18,16 +18,20 @@ struct SetCornersView: View {
     
     @State private var mode: SettingPointMode = .showingButtons(.NW) // Режим отображения окна
     
+    // Переменные для установки широты и доготы углов изображения карты
     @State private var latitude: GeoCoordinate = GeoCoordinate(coordType: DataSource.instance.coordinateType)
     @State private var longitude: GeoCoordinate = GeoCoordinate(coordType: DataSource.instance.coordinateType)
     
-    @State private var mapImage: Image = Image(systemName: "map")
+    @State private var mapImage: Image = Image(systemName: "map") // Изображение карты
     
+    // Переменная для отслеживания был ли заведен угол изображения карты
     @State private var isPinLocked: [CornerType: Bool]? = [.NW: false, .NE: false, .SW: false, .SE: false]
-    @State private var cornerPointsOnImage: [CornerType: CGPoint]? = [.NW: .zero, .NE: .zero, .SW: .zero, .SE: .zero] // Координаты углов изображения карты в системе XY
     
-    @State private var centerPoint: CGPoint = .zero
-    @State private var explicitlyScrollToThisPoint: CGPoint = .zero
+    // Координаты углов изображения карты в системе XY
+    @State private var cornerPointsOnImage: [CornerType: CGPoint]? = [.NW: .zero, .NE: .zero, .SW: .zero, .SE: .zero]
+    
+    @State private var centerPoint: CGPoint = .zero // Центральная точка экрана
+    @State private var explicitlyScrollToThisPoint: CGPoint = .zero // Точка на экране, к которой необходимо перенести метку
     
     var body: some View {
         VStack {
@@ -38,6 +42,7 @@ struct SetCornersView: View {
                                           centerPoint: $centerPoint,
                                           explicitlyScrollToThisPoint: $explicitlyScrollToThisPoint)
             
+            // В режиме отображения кнопок углов изображения карты
             if case .showingButtons = mode {
                 // Кнопки для выбора угла
                 Text("Нажмите на кнопку, чтобы установить угол")
@@ -54,7 +59,7 @@ struct SetCornersView: View {
                     }
                 }
             } 
-            // ПРОДОЛЖИТЬ
+            // В режиме редактирования угла изображения карты
             else if case .editingCornerCoordinates(let cornerType) = mode {
                 if let cornerType = cornerType {
                     VStack {
@@ -115,7 +120,9 @@ struct SetCornersView: View {
                             }
                         }
                 }
-            } else if case .viewingCornerCoordinates(let cornerType) = mode {
+            }
+            // В режиме просмотра координат угла изображения карты
+            else if case .viewingCornerCoordinates(let cornerType) = mode {
                 if let cornerType = cornerType {
                     HStack {
                         Text("Координаты " + cornerType.rawValue + " угла:")

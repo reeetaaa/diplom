@@ -47,7 +47,7 @@ struct GeoPickerControl: View {
             .pickerStyle(.wheel)
             .frame(width: frameWidthFor2)
             .padding(padding)
-            .onChange(of: selectedDeg) { // https://www.hackingwithswift.com/books/ios-swiftui/responding-to-state-changes-using-onchange
+            .onChange(of: selectedDeg) { //https://www.hackingwithswift.com/books/ios-swiftui/responding-to-state-changes-using-onchange
                 coordinate.deg = selectedDeg
             }
             .onAppear {

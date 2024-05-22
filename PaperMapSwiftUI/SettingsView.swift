@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Окно настройки формата координат
 struct SettingsView: View {
     @State private var selectedPrecision = 0
     @State private var selectedFormat = 1

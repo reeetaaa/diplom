@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 import CoreLocationUI
 
-
+// Прокручиваемое изображение карты
 struct ScrollableMap: View {
     
     @Binding var mapImage: Image                 // Изображение карты
@@ -30,11 +30,12 @@ struct ScrollableMap: View {
     
     private let scrollerId = 22222 // Идентификатор прокрутки
     
-    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners) // Точка на карте
+    // Калькулятор расчета точки на карте
+    private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
     
-    private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2) // Отступы
+    private let padding: EdgeInsets = EdgeInsets(top: UIScreen.main.bounds.height / 2, leading: UIScreen.main.bounds.width / 2, bottom: UIScreen.main.bounds.height / 2, trailing: UIScreen.main.bounds.width / 2)
     
-    private let userImage = "location.circle.fill" // Изображение пользователя
+    private let userImage = "location.circle.fill"
     
     // Отображение
     var body: some View {

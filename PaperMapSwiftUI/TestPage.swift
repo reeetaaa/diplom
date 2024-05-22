@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+// Файл для тестрировки различных элементов отдельно 
 struct LineView: View {
     
     @State var coord = GeoCoordinate(coordType: .secDecimals(1), coordInDeg: 33.3456)

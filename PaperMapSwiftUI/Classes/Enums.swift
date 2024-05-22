@@ -8,6 +8,9 @@
 
 import Foundation
 
+// Коллекция  различных перечислений (enumeration)
+
+//
 enum GeoType {
     case latitude
     case longitude

@@ -12,6 +12,8 @@ import SwiftUI
 
 infix operator ~~ 
 
+// Коллекция различных расширений (extension)
+
 extension CGRect {
     func shiftedRect(to point: CGPoint) -> CGRect {
         return CGRect(origin: point, size: self.size)
@@ -46,9 +48,7 @@ extension Int {
 
 extension CGPoint: Hashable {
     
-    /**
-     Oposites of coordinates
-     */
+    // Оппозиты координат
     static prefix func - (p: CGPoint) -> CGPoint {
         CGPoint(x: -p.x, y: -p.y)
     }

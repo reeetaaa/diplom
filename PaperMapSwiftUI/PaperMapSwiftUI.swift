@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Вхождение в приложение
 @main
 struct PaperMapSwiftUIApp: App {
     

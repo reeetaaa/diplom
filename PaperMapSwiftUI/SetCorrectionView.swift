@@ -11,38 +11,44 @@
 import SwiftUI
 import MapKit
 
+// Окно настройки коррекции карты
 struct SetCorrectionView: View {
     
     @Binding var showCorrectionPage: Bool
     
-    @State private var mode: SettingPointMode = .editingCornerCoordinates(.center)
+    @State private var mode: SettingPointMode = .editingCornerCoordinates(.center) // Режим работы окна
     
-    @State private var mapImage: Image = Image(systemName: "pencil")
+    @State private var mapImage: Image = Image(systemName: "map") // Изображение карты
     
-    
+    // Переменная для отслеживания был ли заведен угол изображения карты
     @State private var isPinLocked:         [CornerType: Bool]? = [.center: false]
     @State private var cornerPointsOnImage: [CornerType: CGPoint]? = [.center: .zero]
     
+    // Точка центра изображения карты
     @State private var centerPointOnMyMap: CGPoint = .zero
+    // Точка, к которой необходимо переместить метку
     @State private var explicitlyScrollMapToThisPoint: CGPoint = .zero
     
+    // Координаты коррекции
     @State private var correction = GeoCoordinates(coordType: .minDecimals(1))
     
+    // Положение реальной карты
     @State var positionOfCameraOnRealMap = MapCameraPosition.region(
-        MKCoordinateRegion(center: .init(latitude: 41,longitude: 41),
+        MKCoordinateRegion(center: .init(latitude: 60,longitude: 30),
                            span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01))
     )
     
-    @State var geoCoordinatesOnMyMap: GeoCoordinates?
-    @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D?
+    @State var geoCoordinatesOnMyMap: GeoCoordinates? // Геокоординаты на изображении карты
+    @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D? // Геокоординаты на реальной карте
     
     @State private var lastSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
     @State private var iDidScroll = false
     
-    
+    // Калькулятор расчета точки на карте
     private let pointOnMap = PointOnMapCalculator(corners: DataSource.instance.corners)
     
+    // Изображение метки
     private let unlockedImageName = "smallcircle.filled.circle"
     
     var body: some View {
@@ -108,7 +114,7 @@ struct SetCorrectionView: View {
             }
         }
         .onAppear {
-            mapImage = DataSource.instance.mapImage ?? Image(systemName: "pencil")
+            mapImage = DataSource.instance.mapImage ?? Image(systemName: "map")
             correction = GeoCoordinates(coordType: DataSource.instance.coordinateType)
         }
         .toolbar {
@@ -119,6 +125,7 @@ struct SetCorrectionView: View {
         }
     }
     
+    // Обновление координат коррекции карты
     private func updateCorrection() {
         if let geoCoordinatesOnRealMap = geoCoordinatesOnRealMap, 
             let geoCoordinatesOnMyMap = geoCoordinatesOnMyMap {
@@ -126,6 +133,7 @@ struct SetCorrectionView: View {
         }
     }
     
+    // Переопределить реальную карту в соответствии с коррекцией изображения карты
     private func repaintRealMapAccordingMyMap() {
         if let location = geoCoordinatesOnMyMap {
             positionOfCameraOnRealMap = MapCameraPosition.region(
@@ -150,6 +158,7 @@ struct SetCorrectionView_Preview: PreviewProvider {
     }
 }
 
+// Кнопка для масштабирования реальной карты
 struct ZoomButton: View {
     var title: String
     var zoomMultiplier: Double
