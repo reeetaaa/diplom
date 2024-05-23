@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Основной экран
+// Главный экран
 struct MainPageView: View {
     
     // Изображение карты

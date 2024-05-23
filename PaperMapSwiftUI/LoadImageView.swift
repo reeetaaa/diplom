@@ -3,11 +3,10 @@
 //  PaperMapSwiftUI
 //
 
-import SwiftUI
-import UIKit
-
 //https://betterprogramming.pub/how-to-pick-an-image-from-camera-or-photo-library-in-swiftui-a596a0a2ece
 
+import SwiftUI
+import UIKit
 
 // Использование встроенного UIKit элемента "UIViewControllerRepresentable" в SwiftUI
 struct LoadImageView: UIViewControllerRepresentable {

@@ -11,7 +11,7 @@ import MapKit // Для использоватения встроенной ка
 
 // Окно для навигации по готовому изображению карты
 struct MapView: View {
-    @State private var mapImage: Image = Image(systemName: "pencil") // Изображение карты
+    @State private var mapImage: Image = Image(systemName: "map") // Изображение карты
     
     // Экземпляр класса получения координат пользователя от системы
     @StateObject var locationDataManager = AppLogic.instance.locationDataManager
@@ -76,7 +76,7 @@ struct MapView: View {
             }
         }
         .onAppear {
-            mapImage = DataSource.instance.mapImage ?? Image(systemName: "pencil")
+            mapImage = DataSource.instance.mapImage ?? Image(systemName: "map")
             locationDataManager.startUpdatingLocation()
         }
         .onDisappear {

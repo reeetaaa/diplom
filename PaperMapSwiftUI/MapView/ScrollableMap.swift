@@ -44,7 +44,6 @@ struct ScrollableMap: View {
                 GeometryReader { scrollGeoProxy in
                     ScrollView ([.horizontal, .vertical]) {
                         ZStack {
-                            
                             VStack {
                                 mapImage
                                     .scaleEffect(zoom)
@@ -60,13 +59,11 @@ struct ScrollableMap: View {
                             
                             Spacer().frame(width: 0, height: 0).id(scrollerId).background(.clear)
                             
-                            
                             if userPointOnMap.isInsideTheSize(scrollHelper.contentSize) {
                                 Image(systemName: userImage)
                                     .foregroundStyle(.blue)
                                     .position(userPointOnMap)
                             }
-                            
                         }
                         .scrollTargetLayout()
                         .background(
@@ -91,7 +88,6 @@ struct ScrollableMap: View {
                             
                             centerPoint = scrollHelper.getCenterPointOfVisibleArea()
                         }
-                        
                     }
                     .simultaneousGesture(
                         DragGesture(coordinateSpace: .global)
@@ -147,8 +143,7 @@ struct ScrollableMap: View {
     
     // Коррекция и поиск точки на карте и, при необходимости, прокрутка
     private func correctAndFindPointOnMapAndScrollIfNeeded(from coord: CLLocationCoordinate2D, reader: ScrollViewProxy) {
-        let correctedCoord = GeoCoordinates(from: coord, coordType: DataSource.instance.coordinateType) 
-                                - correction
+        let correctedCoord = GeoCoordinates(from: coord, coordType: DataSource.instance.coordinateType) - correction
         
         if let pointOnMap = pointOnMap.getPointFrom(geoPos: correctedCoord)?.pointOnMap {
             userPointOnMap = pointOnMap

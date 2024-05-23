@@ -136,7 +136,7 @@ class PointOnMapCalculator {
         // Нахождение долготы точки
         var foundLong: GeoCoordinate? = nil
         // 1 градус = 60 морских миль, 1 морская миля = 1852 метра
-        let findingError = 0.00001 // погрешность в градусов (примерно 1.1м)
+        let findingError = 0.00001 // погрешность в градусах (примерно 1.1м)
         while true {
             // Середины двух точек (сверху и снизу)
             let lowerCurrentPoint = lowerLeftCoord1 ~~ lowerRightCoord1
@@ -217,5 +217,4 @@ class MapSpanCalculator: PointOnMapCalculator {
         }
         return nil
     }
-    
 }

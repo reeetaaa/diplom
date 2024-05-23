@@ -41,6 +41,7 @@ struct SetCorrectionView: View {
     @State var geoCoordinatesOnMyMap: GeoCoordinates? // Геокоординаты на изображении карты
     @State var geoCoordinatesOnRealMap: CLLocationCoordinate2D? // Геокоординаты на реальной карте
     
+    // Переменная для соотношения масштаба реальной карты с изображением
     @State private var lastSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
     @State private var iDidScroll = false
@@ -120,7 +121,7 @@ struct SetCorrectionView: View {
         .toolbar {
             Button("Save") {
                 DataSource.instance.mapCorrection = correction
-                showCorrectionPage = false // This will close the window
+                showCorrectionPage = false // Закрытие окна
             }
         }
     }

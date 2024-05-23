@@ -9,7 +9,7 @@ import CoreLocation
 
 // Класс получения координат пользователя от системы
 class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private var locationManager = CLLocationManager()
+    private var locationManager = CLLocationManager() // Управление услугами геопозиционирования
     
     @Published var authorizationStatus: CLAuthorizationStatus? // Статус разрешения использования геопозиции
     @Published var coord: CLLocationCoordinate2D? // Геопозиция пользователя
@@ -37,17 +37,15 @@ class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate
             locationManager.requestLocation()
             break
             
-        case .restricted:  // Location services currently unavailable.
-            // Insert code here of what should happen when Location services are NOT authorized
+        case .restricted:  // Услуги определения местоположения ограничены
             authorizationStatus = .restricted
             break
             
-        case .denied:  // Location services currently unavailable.
-            // Insert code here of what should happen when Location services are NOT authorized
+        case .denied:  // Услуги определения местоположения не разрешены
             authorizationStatus = .denied
             break
             
-        case .notDetermined:        // Authorization not determined yet.
+        case .notDetermined:   // Услуги определения местоположения не определены
             authorizationStatus = .notDetermined
             manager.requestWhenInUseAuthorization()
             break
